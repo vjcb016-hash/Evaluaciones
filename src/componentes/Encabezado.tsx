@@ -7,7 +7,8 @@ import { IconoReloj } from './Iconos'
 /** Barra superior durante la evaluación: logo, título, participante y tiempo restante. */
 export function Encabezado({ evaluacion, nombre }: { evaluacion: EvaluacionPublica; nombre: string }) {
   const ahora = useAhora(1000)
-  const restante = Date.parse(evaluacion.habilitacion.cierraEn) - ahora
+  const cierre = evaluacion.habilitacion ? Date.parse(evaluacion.habilitacion.cierraEn) : ahora
+  const restante = cierre - ahora
   const poco = restante < 5 * 60 * 1000
 
   return (

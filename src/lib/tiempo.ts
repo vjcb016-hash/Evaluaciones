@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import type { Habilitacion } from '../tipos'
 
-export function estaCerrada(h: Habilitacion, ahora = Date.now()): boolean {
-  return h.cerradaPorInstructor || ahora >= Date.parse(h.cierraEn)
+export function estaCerrada(h: Habilitacion | null, ahora = Date.now()): boolean {
+  return !h || h.cerradaPorInstructor || ahora >= Date.parse(h.cierraEn)
 }
 
 /** Devuelve la hora actual y se actualiza cada `cadaMs` milisegundos. */
@@ -15,9 +15,11 @@ export function useAhora(cadaMs = 1000): number {
   return ahora
 }
 
-/** "2 h 05 min" o, si falta menos de una hora, "12:34". */
+/** "3 días", "2 h 05 min" o, si falta menos de una hora, "12:34". */
 export function formatearRestante(ms: number): string {
   const s = Math.max(0, Math.floor(ms / 1000))
+  const dias = Math.floor(s / 86400)
+  if (dias >= 2) return `${dias} días`
   const h = Math.floor(s / 3600)
   const m = Math.floor((s % 3600) / 60)
   if (h > 0) return `${h} h ${String(m).padStart(2, '0')} min`
@@ -26,6 +28,13 @@ export function formatearRestante(ms: number): string {
 
 export function formatearHora(iso: string): string {
   return new Date(iso).toLocaleTimeString('es-PY', { hour: '2-digit', minute: '2-digit', hour12: false })
+}
+
+/** "23:59" si cierra hoy; si no, "20 oct, 23:59". */
+export function formatearCierre(iso: string): string {
+  const d = new Date(iso)
+  if (d.toDateString() === new Date().toDateString()) return formatearHora(iso)
+  return `${d.toLocaleDateString('es-PY', { day: 'numeric', month: 'short' }).replace('.', '')}, ${formatearHora(iso)}`
 }
 
 /** "lunes 19 de octubre, 23:59" */

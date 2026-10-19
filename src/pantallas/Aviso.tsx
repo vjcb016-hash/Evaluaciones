@@ -33,12 +33,18 @@ function TarjetaAviso({
 export function Cerrada({ evaluacion }: { evaluacion: EvaluacionPublica }) {
   const h = evaluacion.habilitacion
   return (
-    <TarjetaAviso logo={MARCAS[evaluacion.marca].logo} icono={<IconoCandado />} titulo="Esta evaluación está cerrada">
+    <TarjetaAviso
+      logo={MARCAS[evaluacion.marca].logo}
+      icono={<IconoCandado />}
+      titulo={h ? 'Esta evaluación está cerrada' : 'Esta evaluación todavía no está abierta'}
+    >
       <p className="font-semibold text-texto">{evaluacion.titulo}</p>
       <p className="mt-2">
-        {h.cerradaPorInstructor
-          ? 'El instructor cerró la evaluación.'
-          : `Cerró el ${formatearFechaHora(h.cierraEn)}.`}
+        {!h
+          ? 'Esperá la indicación del instructor.'
+          : h.cerradaPorInstructor
+            ? 'El instructor cerró la evaluación.'
+            : `Cerró el ${formatearFechaHora(h.cierraEn)}.`}
       </p>
       <p className="mt-4 text-base">Si creés que es un error, hablá con el instructor.</p>
     </TarjetaAviso>

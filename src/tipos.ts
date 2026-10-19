@@ -37,7 +37,8 @@ export interface EvaluacionPublica {
   /** Porcentaje mínimo para aprobar, o null si no hay nota mínima. */
   notaMinima: number | null
   modoResultado: 'inmediato' | 'liberar'
-  habilitacion: Habilitacion
+  /** Habilitación vigente (la más reciente), o null si nunca se habilitó. */
+  habilitacion: Habilitacion | null
   preguntas: PreguntaPublica[]
 }
 

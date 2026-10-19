@@ -65,12 +65,14 @@ export default function PaginaEvaluacion() {
         document.title = `${ev.titulo} · Evaluación`
         setEvaluacion(ev)
 
-        const previo = await buscarEnvioPrevio(ev.habilitacion.id, obtenerDispositivoId())
+        const hab = ev.habilitacion
+        if (!hab) return setPaso({ t: 'cerrada' })
+        const previo = await buscarEnvioPrevio(hab.id, obtenerDispositivoId())
         if (cancelado) return
         if (previo) return await mostrarEnvio(previo, false)
-        if (estaCerrada(ev.habilitacion)) return setPaso({ t: 'cerrada' })
+        if (estaCerrada(hab)) return setPaso({ t: 'cerrada' })
 
-        const prog = leerProgreso(ev.habilitacion.id)
+        const prog = leerProgreso(hab.id)
         const cantidad = ev.preguntas.filter((p) => p.tipo !== 'escala').length
         if (prog && (prog.paso.t === 'satisfaccion' || prog.paso.i < cantidad)) {
           setNombre(prog.nombre)
@@ -91,7 +93,7 @@ export default function PaginaEvaluacion() {
 
   // Guarda el avance en el navegador, por si se recarga la página o se cierra sin querer
   useEffect(() => {
-    if (evaluacion && (paso.t === 'pregunta' || paso.t === 'satisfaccion')) {
+    if (evaluacion?.habilitacion && (paso.t === 'pregunta' || paso.t === 'satisfaccion')) {
       guardarProgreso(evaluacion.habilitacion.id, { nombre, respuestas, comentario, paso })
     }
   }, [evaluacion, paso, nombre, respuestas, comentario])
@@ -135,29 +137,30 @@ export default function PaginaEvaluacion() {
   }
 
   async function enviar() {
-    if (!evaluacion) return
+    const hab = evaluacion?.habilitacion
+    if (!hab) return
     setEnviando(true)
     setErrorEnvio(null)
     try {
       const r = await enviarRespuestas({
         slug,
-        habilitacionId: evaluacion.habilitacion.id,
+        habilitacionId: hab.id,
         dispositivoId: obtenerDispositivoId(),
         nombre,
         respuestas,
         comentario: comentario.trim(),
       })
       if (r.ok) {
-        borrarProgreso(evaluacion.habilitacion.id)
+        borrarProgreso(hab.id)
         setConfirmando(false)
         await mostrarEnvio(r.envioId, true)
       } else if (r.motivo === 'cerrada') {
         setConfirmando(false)
         setPaso({ t: 'cerrada' })
       } else if (r.motivo === 'ya_respondio') {
-        borrarProgreso(evaluacion.habilitacion.id)
+        borrarProgreso(hab.id)
         setConfirmando(false)
-        const previo = await buscarEnvioPrevio(evaluacion.habilitacion.id, obtenerDispositivoId())
+        const previo = await buscarEnvioPrevio(hab.id, obtenerDispositivoId())
         if (previo) await mostrarEnvio(previo, false)
       } else {
         setErrorEnvio('No encontramos esta evaluación. Avisale al instructor.')

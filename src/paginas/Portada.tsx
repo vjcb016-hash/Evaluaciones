@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { aplicarMarca, MARCAS } from '../marcas'
-import { reiniciarDemo } from '../datos/api'
+import { simularOtroDispositivo } from '../lib/dispositivo'
 import type { Marca } from '../tipos'
 
 // Página provisoria para entrar a los ejemplos. En la etapa 3 acá va el panel del instructor.
@@ -22,7 +22,7 @@ export default function Portada() {
   return (
     <main className="mx-auto w-full max-w-[600px] px-4 py-8">
       <h1 className="font-titulo text-[28px] font-bold">Evaluaciones de ejemplo</h1>
-      <p className="mt-1 text-texto-2">Datos de prueba, todavía sin base de datos.</p>
+      <p className="mt-1 text-texto-2">Datos de prueba guardados en Supabase.</p>
 
       <ul className="mt-6 flex flex-col gap-3">
         {DEMOS.map((d) => (
@@ -46,17 +46,18 @@ export default function Portada() {
       <div className="mt-8 rounded-2xl border-2 border-dashed border-black/15 p-4">
         <p className="font-semibold">¿Querés volver a responder?</p>
         <p className="mt-1 text-[15px] text-texto-2">
-          Cada celular puede responder una sola vez. Este botón borra tus respuestas de prueba en este navegador.
+          Cada celular puede responder una sola vez. Este botón hace que este navegador cuente como un celular nuevo.
+          Tus respuestas anteriores siguen guardadas en la base de datos.
         </p>
         <button
           type="button"
           onClick={() => {
-            reiniciarDemo()
+            simularOtroDispositivo()
             setReiniciado(true)
           }}
           className="mt-3 h-12 rounded-xl bg-texto px-4 font-semibold text-white"
         >
-          Borrar mis respuestas de prueba
+          Simular otro celular
         </button>
         {reiniciado && (
           <p className="mt-2 text-[15px] font-semibold text-ok" role="status">

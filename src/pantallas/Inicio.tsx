@@ -1,7 +1,7 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { MARCAS } from '../marcas'
 import type { EvaluacionPublica } from '../tipos'
-import { formatearFecha, formatearHora } from '../lib/tiempo'
+import { formatearCierre, formatearFecha } from '../lib/tiempo'
 import { Boton } from '../componentes/Boton'
 import { IconoInfo } from '../componentes/Iconos'
 
@@ -45,7 +45,7 @@ export function Inicio({
           <ul className="mt-5 flex flex-wrap justify-center gap-2">
             <Chip>{cantidad === 1 ? '1 pregunta' : `${cantidad} preguntas`}</Chip>
             <Chip>{evaluacion.notaMinima === null ? 'Sin nota mínima' : `Nota mínima ${evaluacion.notaMinima}%`}</Chip>
-            <Chip>Cierra {formatearHora(evaluacion.habilitacion.cierraEn)}</Chip>
+            {evaluacion.habilitacion && <Chip>Cierra {formatearCierre(evaluacion.habilitacion.cierraEn)}</Chip>}
           </ul>
         </div>
 

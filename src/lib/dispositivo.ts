@@ -14,6 +14,18 @@ export function generarId(): string {
   return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`
 }
 
+/** Solo para pruebas: este navegador pasa a contar como un dispositivo nuevo. */
+export function simularOtroDispositivo() {
+  enMemoria = null
+  try {
+    for (const clave of Object.keys(localStorage)) {
+      if (clave === CLAVE || clave.startsWith('progreso:')) localStorage.removeItem(clave)
+    }
+  } catch {
+    // sin almacenamiento: nada que borrar
+  }
+}
+
 export function obtenerDispositivoId(): string {
   try {
     let id = localStorage.getItem(CLAVE)
