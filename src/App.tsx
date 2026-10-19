@@ -1,8 +1,14 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
-import Portada from './paginas/Portada'
+import { lazy, Suspense } from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import PaginaEvaluacion from './paginas/Evaluacion'
-import { NoEncontrada } from './pantallas/Aviso'
+import { Cargando, NoEncontrada } from './pantallas/Aviso'
 import { configuracionFaltante } from './datos/supabase'
+
+// El panel se descarga aparte: el celular del participante no lo baja nunca.
+const PanelLayout = lazy(() => import('./paginas/panel/PanelLayout'))
+const ListaEvaluaciones = lazy(() => import('./paginas/panel/ListaEvaluaciones'))
+const NuevaEvaluacion = lazy(() => import('./paginas/panel/FormEvaluacion'))
+const DetalleEvaluacion = lazy(() => import('./paginas/panel/DetalleEvaluacion'))
 
 export default function App() {
   if (configuracionFaltante) {
@@ -19,11 +25,18 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Portada />} />
-        <Route path="/e/:slug" element={<PaginaEvaluacion />} />
-        <Route path="*" element={<NoEncontrada />} />
-      </Routes>
+      <Suspense fallback={<Cargando />}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/panel" replace />} />
+          <Route path="/e/:slug" element={<PaginaEvaluacion />} />
+          <Route path="/panel" element={<PanelLayout />}>
+            <Route index element={<ListaEvaluaciones />} />
+            <Route path="nueva" element={<NuevaEvaluacion />} />
+            <Route path="e/:id" element={<DetalleEvaluacion />} />
+          </Route>
+          <Route path="*" element={<NoEncontrada />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   )
 }
