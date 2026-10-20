@@ -49,7 +49,7 @@ export default function ListaEvaluaciones() {
               to={`/panel/e/${ev.id}`}
               className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm transition hover:shadow-md"
             >
-              <img src={MARCAS[ev.marca].logo} alt={MARCAS[ev.marca].nombre} className="h-12 w-12 shrink-0 object-contain" />
+              <img src={MARCAS[ev.marca].icono} alt={MARCAS[ev.marca].nombre} className="h-12 w-12 shrink-0 object-contain" />
               <div className="min-w-0 flex-1">
                 <p className="font-semibold leading-snug">{ev.titulo}</p>
                 <p className="truncate text-sm text-texto-2">

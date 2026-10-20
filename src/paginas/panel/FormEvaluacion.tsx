@@ -82,7 +82,7 @@ export function FormularioDatos({
 
       <fieldset>
         <legend className="mb-1.5 font-semibold">Marca</legend>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
           {(Object.keys(MARCAS) as Marca[]).map((m) => (
             <label
               key={m}
@@ -98,7 +98,7 @@ export function FormularioDatos({
                 onChange={() => cambiar('marca', m)}
                 className="sr-only"
               />
-              <img src={MARCAS[m].logo} alt="" className="h-10 w-10 object-contain" />
+              <img src={MARCAS[m].icono} alt="" className="h-10 w-10 object-contain" />
               <span className="font-semibold leading-snug">{MARCAS[m].nombre}</span>
             </label>
           ))}

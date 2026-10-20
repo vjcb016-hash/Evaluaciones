@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react'
-import { MARCAS } from '../marcas'
-import type { EvaluacionPublica } from '../tipos'
+import type { EvaluacionPublica, Marca } from '../tipos'
+import { LogoMarca } from '../componentes/LogoMarca'
 import { formatearFechaHora } from '../lib/tiempo'
 import { IconoBuscar, IconoCandado, Spinner } from '../componentes/Iconos'
 
 function TarjetaAviso({
-  logo,
+  marca,
   icono,
   titulo,
   children,
 }: {
-  logo?: string
+  marca?: Marca
   icono: ReactNode
   titulo: string
   children: ReactNode
@@ -18,7 +18,11 @@ function TarjetaAviso({
   return (
     <main className="mx-auto w-full max-w-[600px] px-4 pb-8 pt-6">
       <div className="tarjeta-principal px-5 py-8 text-center">
-        {logo && <img src={logo} alt="" className="mx-auto mb-6 h-16 w-auto object-contain" />}
+        {marca && (
+          <div className="mb-6">
+            <LogoMarca marca={marca} />
+          </div>
+        )}
         <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-tinte-2 text-[40px] text-acento">
           {icono}
         </div>
@@ -34,7 +38,7 @@ export function Cerrada({ evaluacion }: { evaluacion: EvaluacionPublica }) {
   const h = evaluacion.habilitacion
   return (
     <TarjetaAviso
-      logo={MARCAS[evaluacion.marca].logo}
+      marca={evaluacion.marca}
       icono={<IconoCandado />}
       titulo={h ? 'Esta evaluación está cerrada' : 'Esta evaluación todavía no está abierta'}
     >

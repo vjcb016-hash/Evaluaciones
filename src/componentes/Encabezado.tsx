@@ -14,7 +14,7 @@ export function Encabezado({ evaluacion, nombre }: { evaluacion: EvaluacionPubli
   return (
     <header className="sticky top-0 z-10 border-b border-black/5 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-[600px] items-center gap-3 px-4 py-2.5">
-        <img src={MARCAS[evaluacion.marca].logo} alt="" className="h-10 w-10 shrink-0 object-contain" />
+        <img src={MARCAS[evaluacion.marca].icono} alt="" className="h-10 w-10 shrink-0 object-contain" />
         <div className="min-w-0 flex-1 leading-tight">
           <p className="truncate text-[15px] font-semibold">{evaluacion.titulo}</p>
           <p className="truncate text-sm text-texto-2">{nombre}</p>

@@ -23,19 +23,22 @@ Idioma: todo en **español de Paraguay** (voseo: «tenés», «podés»). Códig
 
 ## Marcas
 
-Una sola app, dos marcas. Cada evaluación tiene una marca y el participante ve el logo y colores de esa marca.
+Una sola app, varias marcas. Cada evaluación tiene una marca y el participante ve el logo y colores de esa marca.
 
-| Token | VC Prevención (`vc`) | CBVL (`cbvl`) |
-| --- | --- | --- |
-| Nombre visible | VC Prevención y Capacitación | Bomberos Voluntarios de Luque |
-| Logo | `public/marcas/vc_logo.svg` | `public/marcas/cbvl_logo.png` |
-| Acento (botones, selección) | `#C8140A` | `#2B2A7C` |
-| Acento hover | `#9E0F07` | `#1E1D5C` |
-| Tinte suave (selección, chips) | `#FDF1EF` / `#FCE9E7` | `#EFEFF8` / `#E9E9F5` |
-| Fondo | `#F4F4F2` | `#F2F3F7` |
-| Texto | `#1B1B1B` | `#1B1B22` |
-| Texto secundario | `#5A5A57` | `#55556A` |
-| Detalle especial | — | Franja superior amarilla `#F2D30F` en tarjetas principales |
+| Token | VC Prevención (`vc`) | CBVL (`cbvl`) | SSMA (`ssma`) |
+| --- | --- | --- | --- |
+| Nombre visible | VC Prevención y Capacitación | Bomberos Voluntarios de Luque | SSMA Consultora |
+| Logo | `public/marcas/vc_logo.svg` | `public/marcas/cbvl_logo.png` | `public/marcas/ssma_logo.png` (horizontal) |
+| Ícono cuadrado | el mismo logo | el mismo logo | `public/marcas/ssma_icono.png` |
+| Acento (botones, selección) | `#C8140A` | `#2B2A7C` | `#1E2A5E` |
+| Acento hover | `#9E0F07` | `#1E1D5C` | `#151E45` |
+| Tinte suave (selección, chips) | `#FDF1EF` / `#FCE9E7` | `#EFEFF8` / `#E9E9F5` | `#EEF0F6` / `#E5E8F1` |
+| Fondo | `#F4F4F2` | `#F2F3F7` | `#F2F4F7` |
+| Texto | `#1B1B1B` | `#1B1B22` | `#1A1D29` |
+| Texto secundario | `#5A5A57` | `#55556A` | `#545B70` |
+| Detalle especial | — | Franja superior amarilla `#F2D30F` en tarjetas principales | — |
+
+Agregar una marca: logo (y un ícono cuadrado si el logo es horizontal) en `public/marcas`, entrada en `src/marcas.ts`, colores en `src/index.css` (`[data-marca="…"]`), el tipo `Marca` en `src/tipos.ts` y una migración que amplíe el `check` de `evaluaciones.marca`.
 
 Colores comunes: correcta `#135C33` sobre `#E3F1E8`; incorrecta `#8F0D06` sobre `#FCE9E7`. Siempre acompañar el color con ícono y texto («Correcta» / «Incorrecta»).
 

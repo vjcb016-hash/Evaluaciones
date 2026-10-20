@@ -1,5 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { MARCAS } from '../marcas'
+import { LogoMarca } from '../componentes/LogoMarca'
 import type { EvaluacionPublica } from '../tipos'
 import { formatearCierre, formatearFecha } from '../lib/tiempo'
 import { Boton } from '../componentes/Boton'
@@ -34,7 +35,7 @@ export function Inicio({
     <main className="mx-auto w-full max-w-[600px] px-4 pb-8 pt-6">
       <div className="tarjeta-principal">
         <div className="px-5 pb-6 pt-6 text-center">
-          <img src={marca.logo} alt={marca.nombre} className="mx-auto h-24 w-auto max-w-[220px] object-contain" />
+          <LogoMarca marca={evaluacion.marca} tamano="grande" />
           <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-texto-2">{marca.nombre}</p>
           <h1 className="mt-3 font-titulo text-[28px] font-bold leading-tight">{evaluacion.titulo}</h1>
           <p className="mt-2 text-texto-2">

@@ -80,7 +80,7 @@ export default function PaginaDetalle() {
     <>
       {volver}
       <div className="mb-6 mt-3 flex items-start gap-4">
-        <img src={MARCAS[ev.marca].logo} alt={MARCAS[ev.marca].nombre} className="h-14 w-14 shrink-0 object-contain" />
+        <img src={MARCAS[ev.marca].icono} alt={MARCAS[ev.marca].nombre} className="h-14 w-14 shrink-0 object-contain" />
         <div className="min-w-0">
           <h1 className="font-titulo text-[28px] font-bold leading-tight">{ev.titulo}</h1>
           <p className="mt-1 text-[15px] text-texto-2">

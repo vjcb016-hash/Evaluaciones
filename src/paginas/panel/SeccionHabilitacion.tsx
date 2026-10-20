@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import QRCode from 'qrcode'
-import { MARCAS } from '../../marcas'
+import { LogoMarca } from '../../componentes/LogoMarca'
 import {
   cambiarNotasLiberadas,
   cerrarHabilitacion,
@@ -264,7 +264,7 @@ function QRGrande({
     >
       {/* m-auto centra sin cortar el contenido cuando la ventana es baja */}
       <div className="m-auto flex flex-col items-center gap-4">
-        <img src={MARCAS[evaluacion.marca].logo} alt="" className="h-16 w-auto object-contain" />
+        <LogoMarca marca={evaluacion.marca} decorativo />
         <h2 className="font-titulo text-[clamp(24px,4vw,44px)] font-bold leading-tight">{evaluacion.titulo}</h2>
         <img src={qr} alt={`Código QR de ${link}`} className="aspect-square w-[min(62vh,85vw)]" />
         <p className="font-mono text-[clamp(16px,2.2vw,26px)] font-semibold break-all">{link}</p>

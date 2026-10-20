@@ -1,4 +1,4 @@
-import { MARCAS } from '../marcas'
+import { LogoMarca } from '../componentes/LogoMarca'
 import type { Marca } from '../tipos'
 import { IconoCheck, Spinner } from '../componentes/Iconos'
 
@@ -7,7 +7,7 @@ export function Enviado({ marca, nombre }: { marca: Marca; nombre: string }) {
   return (
     <main className="mx-auto w-full max-w-[600px] px-4 pb-8 pt-6">
       <div className="tarjeta-principal px-5 py-8 text-center">
-        <img src={MARCAS[marca].logo} alt={MARCAS[marca].nombre} className="mx-auto h-16 w-auto object-contain" />
+        <LogoMarca marca={marca} />
         <div className="mx-auto mt-6 grid h-20 w-20 place-items-center rounded-full bg-ok-fondo text-[44px] text-ok">
           <IconoCheck />
         </div>

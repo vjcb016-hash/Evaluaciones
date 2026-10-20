@@ -26,7 +26,7 @@ export function Resultado({
 
       <section className="tarjeta-principal px-5 py-7 text-center" aria-labelledby="titulo-resultado">
         <div className="flex items-center justify-center gap-3">
-          <img src={marca.logo} alt="" className="h-11 w-11 object-contain" />
+          <img src={marca.icono} alt="" className="h-11 w-11 object-contain" />
           <div className="min-w-0 text-left leading-tight">
             <p className="truncate font-semibold">{evaluacion.titulo}</p>
             <p className="truncate text-sm text-texto-2">{resultado.nombre}</p>

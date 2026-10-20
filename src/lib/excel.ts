@@ -2,6 +2,7 @@
 // Todo se hace en el navegador con SheetJS: no se sube ningún archivo a ningún lado.
 
 import * as XLSX from 'xlsx'
+import { MARCAS } from '../marcas'
 import type { EnvioFila, EvaluacionFila, HabilitacionFila, PreguntaFila, PreguntaNueva } from '../datos/panel'
 import type { TipoPregunta } from '../tipos'
 import { claveNombre, nombresRepetidos, resumir } from './resultados'
@@ -346,7 +347,7 @@ export function exportarResultados(
   // Hoja 4: resumen
   const hojaResumen = XLSX.utils.aoa_to_sheet([
     ['Evaluación', evaluacion.titulo],
-    ['Institución', evaluacion.marca === 'vc' ? 'VC Prevención y Capacitación' : 'Bomberos Voluntarios de Luque'],
+    ['Institución', MARCAS[evaluacion.marca].nombre],
     ['Instructor', evaluacion.instructor],
     ['Lugar o empresa', evaluacion.lugar ?? ''],
     ['Habilitada', fechaHora(habilitacion.abierta_en)],

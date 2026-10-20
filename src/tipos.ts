@@ -1,7 +1,7 @@
 // Tipos compartidos por toda la app.
 // "Pública" = lo que el celular del participante puede ver (sin respuestas correctas).
 
-export type Marca = 'vc' | 'cbvl'
+export type Marca = 'vc' | 'cbvl' | 'ssma'
 export type TipoPregunta = 'multiple' | 'vf' | 'escala'
 export type Letra = 'A' | 'B' | 'C' | 'D'
 
